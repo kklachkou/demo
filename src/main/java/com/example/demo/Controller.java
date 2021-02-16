@@ -12,7 +12,7 @@ public class Controller {
 
     @GetMapping
     public A hello() {
-        return A.builder().s("Hello").build();
+        return A.builder().s("Hello Maan!").build();
     }
 
     @Data
