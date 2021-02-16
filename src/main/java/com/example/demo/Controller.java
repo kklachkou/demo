@@ -12,13 +12,12 @@ public class Controller {
 
     @GetMapping
     public A hello() {
-        return A.builder().i(1).s("Hello").build();
+        return A.builder().s("Hello").build();
     }
 
     @Data
     @Builder
     static class A {
-        private int i;
         private String s;
     }
 }
