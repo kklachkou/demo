@@ -1,4 +1,10 @@
-FROM adoptopenjdk:11-jre-hotspot
-RUN mkdir /opt/app
-COPY build/libs/demo*.jar /opt/app/app.jar
-ENTRYPOINT exec java -Djava.rmi.server.logCalls=true -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=3333 -Dcom.sun.management.jmxremote.rmi.port=3333 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -jar /opt/app/app.jar
+FROM adoptopenjdk/openjdk11:jre-11.0.10_9-alpine
+ENV MAX_HEAP=256m
+ARG JAR_FILE=build/libs/demo*.jar
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+COPY ${JAR_FILE} /opt/app.jar
+ENTRYPOINT exec java \
+-Xmx${MAX_HEAP} \
+-Djava.security.egd=file:/dev/./urandom \
+-jar /opt/app.jar
