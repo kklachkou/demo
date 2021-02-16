@@ -18,7 +18,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker build') {
+        stage('Docker deploy') {
             steps {
                 script {
                     sh "ssh -i \"ec2.pem\" ec2-user@ec2-54-213-29-233.us-west-2.compute.amazonaws.com"
