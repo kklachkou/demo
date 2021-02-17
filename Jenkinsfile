@@ -19,7 +19,7 @@ pipeline {
         stage('Docker deploy') {
             steps {
                 sshagent(['ec2-user']) {
-                    sh "ssh ec2-user@54.213.29.233"
+                    sh "ssh ec2-user@54.213.29.233 'docker pull 637994185705.dkr.ecr.us-west-2.amazonaws.com/spring-boot-app'"
                 }
             }
         }
