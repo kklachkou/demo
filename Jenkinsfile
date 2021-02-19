@@ -21,6 +21,8 @@ pipeline {
                 sshagent(['ec2-user']) {
                     sh "ssh ec2-user@34.210.97.136 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 637994185705.dkr.ecr.us-west-2.amazonaws.com'"
                     sh "ssh ec2-user@34.210.97.136 'docker pull 637994185705.dkr.ecr.us-west-2.amazonaws.com/spring-boot-app:latest'"
+                    sh "ssh ec2-user@34.210.97.136 'docker stop app || true && docker rm app || true'"
+                    sh "ssh ec2-user@34.210.97.136 'docker run -d -p 8080:8080 --name app 637994185705.dkr.ecr.us-west-2.amazonaws.com/spring-boot-app'"
                 }
             }
         }
