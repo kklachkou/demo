@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping
-    public A hello() {
-        return A.builder().s("Hello K!").build();
+    public Greetings hello() {
+        return Greetings.builder().message("Hello Dr.K!").build();
     }
 
     @Data
     @Builder
-    static class A {
-        private String s;
+    static class Greetings {
+        private String message;
     }
 }
