@@ -5,6 +5,6 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 COPY ${JAR_FILE} /opt/app.jar
 ENTRYPOINT exec java \
--Xmx${MAX_HEAP} \
+#-Xmx${MAX_HEAP} \
 -Djava.security.egd=file:/dev/./urandom \
 -jar /opt/app.jar
