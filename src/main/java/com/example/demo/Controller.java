@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import io.vavr.control.Try;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,22 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("hello")
+@RequestMapping("/")
 public class Controller {
 
-    @GetMapping
+    @GetMapping("hello")
     public Greetings hello() {
         return Greetings.builder().message("Hello Dr.K!").build();
     }
 
-    @GetMapping("/oome")
-    public void oome() {
-        Try.run(this::oome3);
-    }
-
-    private void oome3() {
-        List<Byte> list = new ArrayList<>();
-        while (true) list.add((byte) 1);
+    @GetMapping("oom")
+    public String outOfMemory() {
+        try {
+            List<Integer> list = new ArrayList<>();
+            while (true) list.add(1);
+        } catch (Throwable t) {
+            System.out.println(t);
+        }
+        return "Finish";
     }
 
     @Data
